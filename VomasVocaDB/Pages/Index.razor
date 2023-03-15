@@ -9,47 +9,56 @@
     <button class="btn btn-primary" @onclick="Do">Do</button>
 </p>
 
+<div style="display: flex; flex-wrap: wrap;">
 @foreach (var artist in artists)
 {
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+    <div class="card" style="width: 10rem;">
+        <img src="@(artist.MainPicture.UrlThumb ?? "https://static.vocadb.net/img/unknown.png")" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title">@artist.Name</h5>
+                @if (artist.Id != 0)
+                {
+                    <a href="https://vocadb/Ar/@artist.Id">VocaDB</a>
+                    <br />
+                }
+            <a href="@artist.Twitter">@artist.Handle</a>
         </div>
     </div>
 }
+</div>
 
 <textarea readonly rows="30" cols="80">
     @data
 </textarea>
 
 @code {
-    private Artist[] artists = new Artist[0];
+    private List<Artist> artists = new();
     private string data;
 
-    public async void Do()
+    public async Task Do()
     {
         var twitters = new[] { "http://twitter.com/arukuremu", "http://twitter.com/arukuremu", "http://twitter.com/iqyu_iq", "http://twitter.com/iqyu_iq", "http://twitter.com/ainodesuyo2", "http://twitter.com/parang__99", "http://twitter.com/aka_acappella", "http://twitter.com/renriactor", "http://twitter.com/ako_okko", "http://twitter.com/ako_okko", "http://twitter.com/aaaspire", "http://twitter.com/Adomiori", "http://twitter.com/ATOLSX", "http://twitter.com/ATOLSX", "http://twitter.com/amiaminosaki", "http://twitter.com/joruzinhina", "http://twitter.com/joruzinhina", "http://twitter.com/ULEInoKAIKITAN", "http://twitter.com/otikaplus2", "http://twitter.com/sato_EFX_Forest", "http://twitter.com/Each_of_Voice", "http://twitter.com/takahashi_manbo", "http://twitter.com/takahashi_manbo", "http://twitter.com/ha_izumi_a", "http://twitter.com/GUMIfromMegpoid", "http://twitter.com/GUMIfromMegpoid", "http://twitter.com/bomless_race", "http://twitter.com/fujitetsu8", "http://twitter.com/usushioshisuu", "http://twitter.com/mopibokaro", "http://twitter.com/donkakusense", "http://twitter.com/AIVOICE_PR", "http://twitter.com/AIVOICE_PR", "http://twitter.com/eo_aui7740", "http://twitter.com/eo_aui7740", "http://twitter.com/yr_nmkiP", "http://twitter.com/yr_nmkiP", "http://twitter.com/zenjimaru39", "http://twitter.com/shibarip1", "http://twitter.com/nantomo_komatta", "http://twitter.com/Non7", "http://twitter.com/Saki_Ohenri", "http://twitter.com/megane2339", "http://twitter.com/Rio_Aporoguist", "http://twitter.com/o03ili", "http://twitter.com/shimamurasan", "http://twitter.com/shimamurasan", "http://twitter.com/kou46", "http://twitter.com/A4_official_", "http://twitter.com/A4_official_", "http://twitter.com/Tuina_chan_PJ", "http://twitter.com/kaedeharuto123", "http://twitter.com/kaedeharuto123", "http://twitter.com/WADATAKEAKI", "http://twitter.com/caracca2", "http://twitter.com/Numb_D", "http://twitter.com/tomatowt", "http://twitter.com/tomatowt", "http://twitter.com/jam3939_shaker", "http://twitter.com/kawaii_ongaku", "http://twitter.com/Alisa_Yakidoya", "http://twitter.com/woodDice_P", "http://twitter.com/notata_kite", "http://twitter.com/kusunokimizuha", "http://twitter.com/MTDTR_tk", "http://twitter.com/yamaji963", "http://twitter.com/yamaji963", "http://twitter.com/sakaishiiya", "http://twitter.com/GuiAnoDayo", "http://twitter.com/GuiAnoDayo", "http://twitter.com/3kMA7", "http://twitter.com/shinji_btd", "http://twitter.com/K_MASERA", "http://twitter.com/fuyukimizo0_abc", "http://twitter.com/55ymtk", "http://twitter.com/yukinegimusic", "http://twitter.com/Ism_songwriter", "http://twitter.com/tk_tkhd", "http://twitter.com/DTM_dopamine", "http://twitter.com/DTM_dopamine", "http://twitter.com/mothy_akuno", "http://twitter.com/kyon_u", "http://twitter.com/tolu_39", "http://twitter.com/heatmetalx", "http://twitter.com/gcmstyle", "http://twitter.com/shikaku_dot", "http://twitter.com/_shikiura_", "http://twitter.com/bomless_race", "http://twitter.com/p_2k", "http://twitter.com/Iida_teike", "http://twitter.com/shidashoku", "http://twitter.com/shu_horiike", "http://twitter.com/shu_horiike", "http://twitter.com/nanamitsuki_73", "http://twitter.com/szri__", "http://twitter.com/Sutasutasutaron", "http://twitter.com/shima_10shi", "http://twitter.com/Icchi1501", "http://twitter.com/Icchi1501", "http://twitter.com/Spacelectro", "http://twitter.com/Spacelectro", "http://twitter.com/chie_rico", "http://twitter.com/sky_letter", "http://twitter.com/zeluga_0901", "http://twitter.com/vf_ie0", "http://twitter.com/zkpower", "http://twitter.com/asna_mp", "http://twitter.com/__TKMYY", "http://twitter.com/TA_MOR_I", "http://twitter.com/TA_MOR_I", "http://twitter.com/takepon_tw", "http://twitter.com/KurzweilMaster", "http://twitter.com/propellerwalker", "http://twitter.com/KiTi_Music", "http://twitter.com/Teary_Planet", "http://twitter.com/Teary_Planet", "http://twitter.com/blackteabisco", "http://twitter.com/jikan_zuidou", "http://twitter.com/Tetracle1", "http://twitter.com/denden01280", "http://twitter.com/denden01280", "http://twitter.com/vf_ie0", "http://twitter.com/ma_ni_ka_", "http://twitter.com/kgneissr", "http://twitter.com/toubunhosiiii", "http://twitter.com/marcopolo_tokyo", "http://twitter.com/MortalerYan", "http://twitter.com/Sohbanasick", "http://twitter.com/Sohbanasick", "http://twitter.com/Fe3O4_11", "http://twitter.com/toriatamastudio", "http://twitter.com/jirai_bugtsune", "http://twitter.com/kanon_mikukanon", "http://twitter.com/Noxundo", "http://twitter.com/narase_05", "http://twitter.com/mn20nm16siguma", "http://twitter.com/Rain_C13", "http://twitter.com/sazae2000en", "http://twitter.com/cocoon__o_o", "http://twitter.com/cocoon__o_o", "http://twitter.com/Nick_Kiyu", "http://twitter.com/kaga_qwerty", "http://twitter.com/kaga_qwerty", "http://twitter.com/kaho__0102", "http://twitter.com/Asahinanegi", "http://twitter.com/nextlight_jp", "http://twitter.com/nextlight_jp", "http://twitter.com/senlalowns", "http://twitter.com/nejishiki0221", "http://twitter.com/nejishiki0221", "http://twitter.com/sfdangbass", "http://twitter.com/heatmetalx", "http://twitter.com/hiromi_hashimo", "http://twitter.com/Luna_miko00", "http://twitter.com/hasutsrk", "http://twitter.com/watashiwasaikyo", "http://twitter.com/1030Aoiyui", "http://twitter.com/hamakido_MD90", "http://twitter.com/iri_qitune", "http://twitter.com/Free_KNiGHTS", "http://twitter.com/pizuya", "http://twitter.com/pomm_pit", "http://twitter.com/Hihumi_v", "http://twitter.com/midori_game_105", "http://twitter.com/osushi0916_", "http://twitter.com/ktnazm0702", "http://twitter.com/grief_art", "http://twitter.com/shotenteki_ore", "http://twitter.com/osamujanaiyo", "http://twitter.com/easypop_betti", "http://twitter.com/easypop_betti", "http://twitter.com/VoiSonaOfficial", "http://twitter.com/kou_shimizu_", "http://twitter.com/kou_shimizu_", "http://twitter.com/MonkOnTheCamel", "http://twitter.com/boorororo358", "http://twitter.com/u_say3_v", "http://twitter.com/u_say3_v", "http://twitter.com/bokuso_chimosi", "http://twitter.com/hosimiya_star", "http://twitter.com/mug_0u0", "http://twitter.com/Tomoya_PB", "http://twitter.com/bcno01", "http://twitter.com/asshole_wii", "http://twitter.com/nekohoshi_neko", "http://twitter.com/0319HIROp", "http://twitter.com/kotoluasama", "http://twitter.com/kotoluasama", "http://twitter.com/skyw315", "http://twitter.com/Amane_moti", "http://twitter.com/ichi_ft", "http://twitter.com/mikucrossing", "http://twitter.com/yatsuwo_emi", "http://twitter.com/cskitsunezuka", "http://twitter.com/hanata256", "http://twitter.com/kurare_art", "http://twitter.com/Minazujune", "http://twitter.com/mnmno373", "http://twitter.com/hiroys_milkcafe", "http://twitter.com/hiroys_milkcafe", "http://twitter.com/muratashiyuu", "http://twitter.com/mememeMEITEIDO", "http://twitter.com/Mellowcle", "http://twitter.com/mentamu_taru", "http://twitter.com/amamw", "http://twitter.com/camelleonsound", "http://twitter.com/yaduken", "http://twitter.com/nagi_yanari", "http://twitter.com/rere_soft", "http://twitter.com/bcno01", "http://twitter.com/younalife85", "http://twitter.com/bass_ynk", "http://twitter.com/bass_ynk", "http://twitter.com/Yunoatto", "http://twitter.com/RinHuei", "http://twitter.com/Yuyuxcos", "http://twitter.com/Arikaze_cos", "http://twitter.com/yrs_404", "http://twitter.com/bsf133661", "http://twitter.com/Raioo123", "http://twitter.com/noncomcom", "http://twitter.com/turn3341", "http://twitter.com/noboru_e", "http://twitter.com/noboru_e", "http://twitter.com/torque96k", "http://twitter.com/Locust223", "http://twitter.com/logiurakobo", "http://twitter.com/jirai_bugtsune", "http://twitter.com/romotco", "http://twitter.com/lolproject000", "http://twitter.com/LonePi_", "http://twitter.com/sukenoji1", "http://twitter.com/Mwk_094" };
 
-        var sample = twitters.Take(10);
+        var sample = twitters.Distinct().Take(10);
 
         foreach (var twitter in sample)
         {
-            var result = await Http.GetFromJsonAsync<ListResult<Artist>>("https://vocadb.net/api/artists?fields=MainPicture&lang=English&query=" + HttpUtility.UrlEncode(twitter));
-            var artist = result?.Items.FirstOrDefault();
-            if (artist != null)
-            {
-                artist.Twitter = twitter;
-                data += JsonSerializer.Serialize(artist) + Environment.NewLine;
-            } else
-            {
-                data += "No artist found for " + twitter + Environment.NewLine;
-            }
+            var handle = "@" + twitter.Substring(twitter.LastIndexOf("/") + 1);
+            var artist = await Get(twitter) ?? await Get(twitter.Replace("http://", "https://")) ?? new Artist { Name = handle };
+            artist.Twitter = twitter;
+            artist.Handle = handle;
+            data += JsonSerializer.Serialize(artist) + Environment.NewLine;
+            artists.Add(artist);
 
         }
         this.StateHasChanged();
+    }
+
+    private async Task<Artist?> Get(string twitter)
+    {
+        var result = await Http.GetFromJsonAsync<ListResult<Artist>>("https://vocadb.net/api/artists?fields=MainPicture&lang=English&query=" + HttpUtility.UrlEncode(twitter));
+        var artist = result?.Items.FirstOrDefault();
+        return artist;
     }
 
     class ListResult<T>
@@ -62,5 +71,12 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Twitter { get; set; }
+        public string Handle { get; set; }
+        public Picture MainPicture { get; set; } = new();
+    }
+
+    class Picture
+    {
+        public string UrlThumb { get; set; }
     }
 }
