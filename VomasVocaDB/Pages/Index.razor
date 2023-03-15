@@ -2,6 +2,7 @@
 @using System.Web;
 @using System.Text.Json;
 @inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 <PageTitle>Index</PageTitle>
 
@@ -33,7 +34,7 @@
 
 @code {
     private List<Artist> artists = new();
-    private string data;
+    private string data = "";
 
     public async Task Do()
     {
@@ -56,8 +57,14 @@
 
     private async Task<Artist?> Get(string twitter)
     {
+        var cacheKey = "vdb_" + twitter;
+        if (await localStorage.ContainKeyAsync(cacheKey))
+        {
+            return await localStorage.GetItemAsync<Artist>(cacheKey);
+        }
         var result = await Http.GetFromJsonAsync<ListResult<Artist>>("https://vocadb.net/api/artists?fields=MainPicture&lang=English&query=" + HttpUtility.UrlEncode(twitter));
         var artist = result?.Items.FirstOrDefault();
+        await localStorage.SetItemAsync(cacheKey, artist);
         return artist;
     }
 
